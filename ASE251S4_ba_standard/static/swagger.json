@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Backend Analítico API",
+    "version": "1.0.0",
+    "description": "API REST para exposición de indicadores empresariales integrando SQL Server mediante arquitectura por capas."
+  },
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Indicadores SQL Server",
+      "description": "Indicadores generados a partir de datos transaccionales almacenados en SQL Server."
+    }
+  ],
+  "paths": {
+    "/analytics/sql/sales-total": {
+      "get": {
+        "tags": [
+          "Indicadores SQL Server"
+        ],
+        "summary": "Obtener ventas totales",
+        "description": "Calcula el monto total vendido utilizando la información transaccional almacenada en SQL Server.",
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "indicator": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "chart_type": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "number"
+                },
+                "sources": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analytics/pandas/monthly-sales": {
+      "get": {
+        "tags": [
+          "Indicadores SQL Server"
+        ],
+        "summary": "Obtener ventas por mes",
+        "description": "Devuelve las ventas agrupadas por mes usando Pandas.",
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "month": {
+                    "type": "string"
+                  },
+                  "total_amount": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analytics/sql/sales-by-region": {
+      "get": {
+        "tags": [
+          "Indicadores SQL Server"
+        ],
+        "summary": "Obtener ventas por región",
+        "description": "Analizar el comportamiento de ventas agrupado por región.",
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "region": {
+                    "type": "string"
+                  },
+                  "sales": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
